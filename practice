@@ -1,0 +1,150 @@
+1. 실습 <변수 선언, 시리얼 함수>
+int myNumber = 10;
+float myFloat = 3.14;
+char myChar = 'A';
+boolean myBoolean = true;
+
+void setup() {
+ Serial.begin(9600);
+}
+
+void loop() {
+ Serial.print("Int: ");
+ Serial.println(myNumber);
+ Serial.print("Float: ");
+ Serial.println(myFloat);
+ Serial.print("Char: ");
+ Serial.println(myChar);
+ Serial.print("Boolean: ");
+ Serial.println(myBoolean);
+ delay(1000);
+}
+
+
+2. 실습 <if 조건문>
+int num= 25;
+
+void setup() {
+ Serial.begin(9600);
+}
+void loop() {
+
+  if (num > 0) {
+  Serial.println("num > 0");
+} else if (num < 0) {
+  Serial.println("num<0");
+
+} else {
+  Serial.println("num=0");
+}
+delay(1000);
+}
+
+
+3. 실습 <if 온도 조건문 연습문제>
+int temperature = 25;
+
+void setup() {
+ Serial.begin(9600);
+}
+void loop() {
+  만약 온도 값이 30 초과라면 {
+  Serial.println("It's hot!");
+  } 온도 값이 15 미만이라면 {
+  Serial.println("It's cold!");
+ } 모두 아니라면 {
+    Serial.println("The temperature is moderate.");
+}
+  delay(1000); // 1초 대기
+}
+
+
+
+4. 실습 <for문>
+void setup() {
+ Serial.begin(9600);
+}
+
+void loop() {
+ for (int i = 0; i < 10; i++) {
+  Serial.print("for loop iteration: ");
+  Serial.println(i);
+  delay(500); // 0.5초 대기
+ }
+ delay(2000); // 2초 대기
+}
+
+
+
+
+5. 실습 <LED 깜빡이기>
+void setup() {
+ pinMode(8, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(8, HIGH);
+  delay(1000);
+  digitalWrite(8, LOW);
+  delay(1000);
+}
+
+
+
+
+
+6. 실습 <LED 교통신호등>
+#define LED_RED 2
+#define LED_YELLOW 3
+#define LED_GREEN 4
+
+void setup(){
+  pinMode(LED_RED, OUTPUT);
+  pinMode(LED_YELLOW, OUTPUT);
+  pinMode(LED_GREEN, OUTPUT);
+}
+void loop(){
+  digitalWrite(LED_GREEN, LOW);
+  digitalWrite(LED_RED, HIGH);
+  delay(1000);
+  digitalWrite(LED_RED, LOW);
+  digitalWrite(LED_YELLOW, HIGH);
+  delay(1000);
+  digitalWrite(LED_YELLOW, LOW);
+  digitalWrite(LED_GREEN, HIGH);
+delay(1000);
+}
+
+
+
+
+
+
+
+
+
+실습 <초음파 실습 - 가까이 다가가면 켜지는 LED>
+#define tring 2
+#define echo 3
+#define LED_PIN 4
+
+void setup(){
+  pinMode(tring, OUTPUT); // 출력으로 설정
+  pinMode(echo, INPUT); // 입력으로 설정
+  pinMode(LED_PIN, OUTPUT);
+  Serial.begin(9600); // 시리얼 모니터 속도 9600 설정
+}
+void loop(){
+  digitalWrite(tring, LOW); // 0V 출력
+  delayMicroseconds(2);
+  digitalWrite(tring, HIGH); // 5V 출력
+  delayMicroseconds(10);
+  digitalWrite(tring, LOW); // 0V 출력
+  long duration = pulseIn(echo, HIGH); // pulseIn 값 저장
+  long distance = (duration*340)/2/10000; // 거리 구하기
+  if(distance <= 5)
+    digitalWrite(LED_PIN,HIGH);
+  else
+    digitalWrite(LED_PIN,LOW);
+delay(500);
+}
