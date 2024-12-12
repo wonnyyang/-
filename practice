@@ -21,6 +21,9 @@ void loop() {
 }
 
 
+-------------------------------------------------------
+
+
 2. 실습 <if 조건문>
 int num= 25;
 
@@ -41,6 +44,9 @@ delay(1000);
 }
 
 
+-----------------------------------------------------------
+
+
 3. 실습 <if 온도 조건문 연습문제>
 int temperature = 25;
 
@@ -57,6 +63,9 @@ void loop() {
 }
   delay(1000); // 1초 대기
 }
+
+
+-----------------------------------------------------------
 
 
 
@@ -76,6 +85,8 @@ void loop() {
 
 
 
+-------------------------------------------------------
+
 
 5. 실습 <LED 깜빡이기>
 void setup() {
@@ -90,7 +101,7 @@ void loop() {
 }
 
 
-
+--------------------------------------------------------
 
 
 6. 실습 <LED 교통신호등>
@@ -116,14 +127,63 @@ delay(1000);
 }
 
 
+--------------------------------------------------------
 
 
+7. 실습 <서브모터 180도>
+# include <Servo.h>
+Servo servo;
+
+void setup() {
+ servo.attach(9);
+}
+void loop() {
+
+ for (int pos = 0; pos <= 180; pos++) {
+  servo.write(pos);
+  delay(15);
+ }
+ servo.write(0);
+ delay(1000);
+}
 
 
+--------------------------------------------------------
 
 
+8. 실습 <button + 서브모터>
+#include <Servo.h>
 
-실습 <초음파 실습 - 가까이 다가가면 켜지는 LED>
+#define SERVO 9
+#define BUTTON 8
+
+Servo servo;
+int angle=0;
+
+void setup()
+{
+ servo.attach(SERVO);
+ pinMode(BUTTON,INPUT);
+ servo.write(0);
+}
+void loop()
+{
+ int readval = digitalRead(BUTTON);
+ if(readval == 1)
+ {
+  angle += 30;
+  servo.write(angle);
+  delay(500);
+  if(angle == 180)
+   angle = 0;
+ }
+}
+
+
+----------------------------------------------------------------------
+
+
+9. 실습 <초음파 실습 - 가까이 다가가면 켜지는 LED>
 #define tring 2
 #define echo 3
 #define LED_PIN 4
